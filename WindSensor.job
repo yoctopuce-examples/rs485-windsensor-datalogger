@@ -1,0 +1,18 @@
+{
+"GetWind":{"script":
+[{"expect":"Q,($direction:INT),($speed:FLOAT),M,00,.*"}
+]},
+"LowWind":{"script":
+[{"expect":"Q,,($speed:FLOAT),M,00,.*"},
+ {"compute":"$direction = -1"}
+]},
+"AssignWind":{"interval":50,"script":
+[{"assert":"isset($speed)"},
+ {"assert":"$speed >= 0"},
+ {"compute":"$1 = $speed"},
+ {"compute":"$2 = $speed"},
+ {"compute":"$direction = -1"},
+ {"compute":"$speed = -1"},
+ {"sync":250}
+]}
+}
